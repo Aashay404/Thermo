@@ -1,64 +1,84 @@
 "use client";
 
 import React from "react";
-import { Phone, MessageSquare, ShieldCheck, Mail } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Phone, ShieldCheck } from "lucide-react";
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  const navLinks = [
+    { label: "HOME", href: "/" },
+    { label: "ABOUT US", href: "/about" },
+    { label: "SERVICES", href: "/services" },
+    { label: "PRODUCTS", href: "/products" },
+    { label: "PROJECTS", href: "/projects" },
+    { label: "SUBSIDY ASSISTANCE", href: "/subsidy" },
+    { label: "BLOG", href: "/blog" },
+    { label: "CONTACT", href: "/contact" },
+  ];
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/5 bg-[#0C2340]/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand Identity */}
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-accent text-white shadow-lg shadow-teal-accent/20">
-            <ShieldCheck className="h-6 w-6" />
+    <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white shadow-sm">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* Brand Logo - Left */}
+        <Link href="/" className="flex items-center gap-2 shrink-0">
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-[#1c335e] to-[#0c2340] text-white shadow-md">
+            <ShieldCheck className="h-7 w-7" />
           </div>
           <div>
-            <div className="text-lg font-bold tracking-tight text-white font-display">
-              THERMOVAULT <span className="text-teal-light">SYSTEMS</span>
+            <div className="text-xl font-bold tracking-tight text-[#0c2340] font-display flex items-baseline leading-none">
+              ThermoVault
             </div>
-            <div className="hidden text-[10px] text-silver sm:block font-mono">
+            <div className="text-[9px] font-bold text-slate-500 font-mono tracking-widest leading-none mt-1">
+              — SYSTEMS —
+            </div>
+            <div className="text-[7px] text-[#0c2340]/70 font-mono uppercase tracking-wider block mt-0.5">
               Securing the Cold Chain Ecosystem
             </div>
           </div>
-        </div>
+        </Link>
 
-        {/* Sticky CTAs / Contact Bar */}
-        <div className="flex items-center gap-3">
-          <a
-            href="tel:+918055010620"
-            className="hidden items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium text-silver transition-colors hover:text-white md:flex"
-          >
-            <Phone className="h-3.5 w-3.5 text-teal-light" />
-            <span>+91 80550 10620</span>
-          </a>
+        {/* Centered Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-[10px] xl:text-[11px] font-bold tracking-wider transition-all duration-200 relative pb-1 border-b-2 hover:text-blue-600 ${
+                  isActive
+                    ? "text-blue-600 border-blue-600 font-extrabold"
+                    : "text-[#0c2340] border-transparent"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
 
-          <a
-            href="mailto:info@thermovaultsystems.com"
-            className="hidden items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium text-silver transition-colors hover:text-white lg:flex"
-          >
-            <Mail className="h-3.5 w-3.5 text-teal-light" />
-            <span>info@thermovaultsystems.com</span>
-          </a>
-
-          <a
-            href="https://wa.me/918055010620?text=Hi%20ThermoVault,%20I%20need%20a%20cold%20room%20solution."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-lg bg-emerald-600/90 px-3.5 py-1.5 text-xs font-medium text-white transition-all hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-600/20 active:scale-95"
-          >
-            <MessageSquare className="h-3.5 w-3.5 fill-white/10" />
-            <span>WhatsApp Us</span>
-          </a>
-
+        {/* Right Action buttons */}
+        <div className="flex items-center gap-4 shrink-0">
           <button
             onClick={() => {
               const event = new CustomEvent("open-quote-modal");
               window.dispatchEvent(event);
             }}
-            className="rounded-lg bg-teal-accent px-4 py-1.5 text-xs font-medium text-white transition-all hover:bg-teal-light hover:shadow-lg hover:shadow-teal-accent/30 active:scale-95"
+            className="rounded-md bg-[#0c2340] px-5 py-2 text-xs font-bold text-white transition-all hover:bg-[#183960] shadow-md hover:shadow-lg active:scale-95"
           >
-            Get Free Quote
+            Get Free Consultation
           </button>
+
+          <a
+            href="tel:+918055010620"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-[#0c2340] hover:bg-slate-100 hover:text-blue-600 transition-colors"
+            title="Call Support"
+          >
+            <Phone className="h-4 w-4" />
+          </a>
         </div>
       </div>
     </header>

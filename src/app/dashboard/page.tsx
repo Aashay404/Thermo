@@ -73,7 +73,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="flex flex-col flex-1 h-full min-h-screen bg-[#0C2340]">
+    <div className="flex flex-col flex-1 h-full min-h-screen bg-[#0C2340] text-white">
       {/* Global Header */}
       <Navbar />
 

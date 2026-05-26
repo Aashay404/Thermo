@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Search, BookOpen, Clock, Tag, ArrowRight } from "lucide-react";
+import { Search, BookOpen, Clock, Tag, ArrowRight, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Article {
@@ -125,38 +125,44 @@ export default function BlogIndexPage() {
   });
 
   return (
-    <div className="flex flex-col flex-1 min-h-screen bg-[#0C2340] text-white selection:bg-[#0F6E56]">
+    <div className="flex flex-col flex-1 min-h-screen bg-white text-slate-800 selection:bg-blue-600 selection:text-white">
       {/* Header */}
       <Navbar />
 
-      {/* Hero Header */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#0C2340] via-[#111318] to-[#0c2340] py-16 sm:py-24 text-center">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-teal-light font-mono block">
-            Knowledge Center
-          </span>
+      {/* Hero Header with image background */}
+      <section 
+        className="relative bg-cover bg-center bg-no-repeat py-20 text-white overflow-hidden"
+        style={{ backgroundImage: "url('/images/hero_background.png')" }}
+      >
+        {/* Dark Navy Tint Overlay */}
+        <div className="absolute inset-0 bg-[#0C2340]/80" />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-4 z-10 text-center md:text-left">
+          <div className="flex items-center justify-center md:justify-start gap-1 text-[10px] font-bold uppercase tracking-wider text-teal-light font-mono">
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>Home &gt; Knowledge Center</span>
+          </div>
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl font-display">
-            ThermoVault Blog & Insights
+            ThermoVault <span className="text-blue-400">Blog & Insights</span>
           </h1>
-          <p className="max-w-xl mx-auto text-xs sm:text-sm text-silver/80 leading-relaxed">
+          <p className="max-w-2xl text-xs sm:text-sm text-slate-200/90 leading-relaxed">
             Read engineering guides, subsidy checklists, and thermal calculation resources curated by design draftsman teams.
           </p>
         </div>
       </section>
 
       {/* Search Bar & Category Filters */}
-      <section className="py-6 bg-[#0C2340]/40 border-t border-white/5">
-        <div className="mx-auto max-w-4xl px-4 flex flex-col md:flex-row gap-4 items-center justify-between">
+      <section className="py-6 bg-slate-50 border-b border-slate-100">
+        <div className="mx-auto max-w-7xl px-4 flex flex-col md:flex-row gap-4 items-center justify-between">
           {/* Search input */}
           <div className="relative w-full md:w-80">
-            <Search className="absolute left-3 top-2.5 h-4.5 w-4.5 text-silver/40" />
+            <Search className="absolute left-3 top-2.5 h-4.5 w-4.5 text-slate-400" />
             <input
               type="text"
               placeholder="Search keyword (e.g. subsidy)..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-xl bg-[#0c2340] border border-white/5 pl-10 pr-4 py-2 text-xs text-white placeholder-white/20 focus:outline-none focus:border-teal-light"
+              className="w-full rounded-xl bg-white border border-slate-200 pl-10 pr-4 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-600 transition-colors"
             />
           </div>
 
@@ -174,8 +180,8 @@ export default function BlogIndexPage() {
                 onClick={() => setFilter(btn.id as any)}
                 className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all ${
                   filter === btn.id
-                    ? "bg-teal-accent text-white"
-                    : "text-silver hover:text-white hover:bg-white/3"
+                    ? "bg-[#0c2340] text-white"
+                    : "bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                 }`}
               >
                 {btn.label}
@@ -186,7 +192,7 @@ export default function BlogIndexPage() {
       </section>
 
       {/* Blog Cards Grid */}
-      <section className="py-20 bg-[#111318] border-t border-white/5 flex-1">
+      <section className="py-20 bg-white flex-1">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             layout
@@ -201,12 +207,12 @@ export default function BlogIndexPage() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.2 }}
                   key={art.slug}
-                  className="group rounded-2xl border border-white/5 bg-[#0C2340]/40 p-6 flex flex-col justify-between hover:border-teal-light/20 transition-all duration-300"
+                  className="group rounded-2xl border border-slate-100 bg-white p-6 flex flex-col justify-between hover:shadow-md transition-shadow duration-300"
                 >
                   <div className="space-y-4">
-                    <div className="flex items-center gap-3 text-[9px] font-mono text-silver border-b border-white/2 pb-2">
+                    <div className="flex items-center gap-3 text-[9px] font-mono text-slate-400 border-b border-slate-100 pb-2">
                       <span className="flex items-center gap-1">
-                        <Tag className="h-3 w-3 text-teal-light" />
+                        <Tag className="h-3 w-3 text-blue-600" />
                         {art.type}
                       </span>
                       <span>•</span>
@@ -216,19 +222,19 @@ export default function BlogIndexPage() {
                       </span>
                     </div>
 
-                    <h3 className="text-sm font-bold text-white group-hover:text-teal-light transition-colors font-display leading-snug">
+                    <h3 className="text-sm font-bold text-[#0c2340] group-hover:text-blue-600 transition-colors font-display leading-snug">
                       {art.title}
                     </h3>
-                    <p className="text-xs text-silver/85 leading-relaxed">{art.summary}</p>
-                    <div className="text-[10px] text-teal-light font-mono bg-white/2 p-2 rounded-lg border border-white/2 select-all">
+                    <p className="text-xs text-slate-500 leading-relaxed">{art.summary}</p>
+                    <div className="text-[10px] text-blue-600 font-mono bg-blue-50/50 p-2 rounded-lg border border-blue-100/50 select-all">
                       SEO Keyword: {art.keyword}
                     </div>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-white/5">
+                  <div className="pt-6 mt-6 border-t border-slate-100">
                     <Link
                       href={`/blog/${art.slug}`}
-                      className="inline-flex items-center gap-1 text-[11px] font-bold text-silver hover:text-white transition-colors"
+                      className="inline-flex items-center gap-1 text-[11px] font-bold text-slate-500 hover:text-blue-600 transition-colors"
                     >
                       <span>Read Full Insight</span>
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -240,8 +246,8 @@ export default function BlogIndexPage() {
           </motion.div>
 
           {filteredArticles.length === 0 && (
-            <div className="text-center py-12 text-silver">
-              <BookOpen className="h-10 w-10 text-silver/30 mx-auto mb-3" />
+            <div className="text-center py-12 text-slate-400">
+              <BookOpen className="h-10 w-10 text-slate-300 mx-auto mb-3" />
               <div className="text-xs font-semibold">No insights match your filter criteria.</div>
             </div>
           )}
