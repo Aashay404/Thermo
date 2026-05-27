@@ -159,7 +159,7 @@ export default function LandingPage() {
             return (
               <div 
                 key={idx} 
-                className="flex flex-col items-center gap-3 p-2 border-r border-slate-100 last:border-0 md:border-r"
+                className="flex flex-col items-center gap-3 p-2 md:border-r md:border-slate-100 md:last:border-0 border-0"
               >
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600">
                   <Icon className="h-5 w-5" />

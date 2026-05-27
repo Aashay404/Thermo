@@ -1,13 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Phone, ShieldCheck } from "lucide-react";
+import { Phone, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { label: "HOME", href: "/" },
@@ -35,7 +37,7 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Centered Navigation Links */}
+        {/* Centered Navigation Links (Desktop) */}
         <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
@@ -56,13 +58,13 @@ export default function Navbar() {
         </nav>
 
         {/* Right Action buttons */}
-        <div className="flex items-center gap-4 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-4 shrink-0">
           <button
             onClick={() => {
               const event = new CustomEvent("open-quote-modal");
               window.dispatchEvent(event);
             }}
-            className="rounded-md bg-[#0c2340] px-5 py-2 text-xs font-bold text-white transition-all hover:bg-[#183960] shadow-md hover:shadow-lg active:scale-95"
+            className="hidden sm:inline-block rounded-md bg-[#0c2340] px-5 py-2 text-xs font-bold text-white transition-all hover:bg-[#183960] shadow-md hover:shadow-lg active:scale-95"
           >
             Get Free Consultation
           </button>
@@ -74,8 +76,64 @@ export default function Navbar() {
           >
             <Phone className="h-4 w-4" />
           </a>
+
+          {/* Mobile Hamburger Toggle Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-[#0c2340] hover:bg-slate-100 hover:text-blue-600 transition-colors lg:hidden"
+            title="Toggle Menu"
+          >
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Panel (Slide down dropdown) */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="lg:hidden border-b border-slate-200 bg-white overflow-hidden"
+          >
+            <div className="px-4 pt-2 pb-6 space-y-2">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block py-2.5 px-3 text-xs font-bold rounded-lg transition-colors ${
+                      isActive
+                        ? "bg-blue-50 text-blue-600 font-extrabold"
+                        : "text-[#0c2340] hover:bg-slate-50"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+
+              {/* Consultation button in mobile menu */}
+              <div className="pt-4 border-t border-slate-100 sm:hidden">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    const event = new CustomEvent("open-quote-modal");
+                    window.dispatchEvent(event);
+                  }}
+                  className="w-full text-center rounded-lg bg-[#0c2340] py-3 text-xs font-bold text-white transition-all hover:bg-[#183960] active:scale-95"
+                >
+                  Get Free Consultation
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

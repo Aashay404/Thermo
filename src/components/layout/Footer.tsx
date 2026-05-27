@@ -14,15 +14,6 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand Info */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Image
-                src="/images/logo.png"
-                alt="ThermoVault Systems Logo"
-                width={200}
-                height={50}
-                className="h-10 w-auto object-contain brightness-0 invert"
-              />
-            </div>
             <p className="text-xs leading-relaxed text-silver/80">
               Securing the cold chain ecosystem across India with high-efficiency walk-in cold storage rooms, engineering-grade PUF panels, and advanced IoT telemetry alerts.
             </p>
