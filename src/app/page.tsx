@@ -157,7 +157,14 @@ export default function LandingPage() {
 
       {/* Floating White Features Box Ribbon overlapping the Hero */}
       <section className="relative z-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full -mt-10">
-        <div className="rounded-xl bg-white border border-slate-100 p-6 md:p-8 shadow-xl grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 40, rotateX: 15 }}
+          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          style={{ transformStyle: "preserve-3d", perspective: 1000 }}
+          className="rounded-xl bg-white border border-slate-100 p-6 md:p-8 shadow-xl grid grid-cols-2 md:grid-cols-5 gap-6 text-center"
+        >
           {[
             { icon: Thermometer, label: "PRECISE TEMPERATURE CONTROL" },
             { icon: Zap, label: "ENERGY EFFICIENT SYSTEMS" },
@@ -180,7 +187,7 @@ export default function LandingPage() {
               </div>
             );
           })}
-        </div>
+        </motion.div>
       </section>
 
       {/* About ThermoVault Section */}
@@ -188,7 +195,13 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Story text */}
-            <div className="space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, x: -50, rotateY: 10 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="space-y-6"
+            >
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono block">
                 ABOUT THERMOVAULT SYSTEMS
               </span>
@@ -223,10 +236,16 @@ export default function LandingPage() {
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
             {/* Interactive 3D WebGL Telemetry Sandbox on the right */}
-            <div className="space-y-4">
+            <motion.div 
+              initial={{ opacity: 0, x: 50, rotateY: -10 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="space-y-4"
+            >
               <div className="relative h-[340px] rounded-2xl overflow-hidden border border-slate-100 shadow-lg bg-slate-900">
                 <ColdRoom3D
                   doorOpen={doorOpen}
@@ -284,7 +303,7 @@ export default function LandingPage() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -306,8 +325,11 @@ export default function LandingPage() {
             {services.map((svc, idx) => (
               <motion.div
                 key={idx}
+                initial={{ opacity: 0, y: 50, rotateX: 15 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <Link
                   href={`/services/${svc.slug}`}
@@ -360,7 +382,13 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left lists */}
-            <div className="space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, x: -40, rotateY: 8 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="space-y-6"
+            >
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono block">
                 WHY CHOOSE US?
               </span>
@@ -382,34 +410,30 @@ export default function LandingPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Right outline stats counters */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-xl border border-white/10 bg-white/2 p-6 text-center space-y-2">
-                <div className="text-3xl font-extrabold text-blue-400 font-mono">200+</div>
-                <div className="text-[9px] font-bold uppercase tracking-wider text-slate-300 font-mono">
-                  Projects Completed
-                </div>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/2 p-6 text-center space-y-2">
-                <div className="text-3xl font-extrabold text-blue-400 font-mono">100+</div>
-                <div className="text-[9px] font-bold uppercase tracking-wider text-slate-300 font-mono">
-                  Happy Clients
-                </div>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/2 p-6 text-center space-y-2">
-                <div className="text-3xl font-extrabold text-blue-400 font-mono">15+</div>
-                <div className="text-[9px] font-bold uppercase tracking-wider text-slate-300 font-mono">
-                  States Served
-                </div>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/2 p-6 text-center space-y-2">
-                <div className="text-3xl font-extrabold text-blue-400 font-mono">10+</div>
-                <div className="text-[9px] font-bold uppercase tracking-wider text-slate-300 font-mono">
-                  Years of Experience
-                </div>
-              </div>
+              {[
+                { val: "200+", label: "Projects Completed" },
+                { val: "100+", label: "Happy Clients" },
+                { val: "15+", label: "States Served" },
+                { val: "10+", label: "Years of Experience" }
+              ].map((stat, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.85, rotateX: -10 }}
+                  whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
+                  className="rounded-xl border border-white/10 bg-white/2 p-6 text-center space-y-2"
+                >
+                  <div className="text-3xl font-extrabold text-blue-400 font-mono">{stat.val}</div>
+                  <div className="text-[9px] font-bold uppercase tracking-wider text-slate-300 font-mono">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
