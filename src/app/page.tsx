@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import {
@@ -29,6 +30,8 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
+const ColdRoom3D = dynamic(() => import("@/components/dashboard/ColdRoom3D"), { ssr: false });
+
 export default function LandingPage() {
   const [contactFormSent, setContactFormSent] = useState(false);
   const [formData, setFormData] = useState({
@@ -39,6 +42,11 @@ export default function LandingPage() {
     roomSize: "Small (Below 10 MT)",
     msg: "",
   });
+
+  // 3D WebGL Sandbox control states
+  const [doorOpen, setDoorOpen] = useState(false);
+  const [compressorActive, setCompressorActive] = useState(true);
+  const [temp, setTemp] = useState(-18.5);
 
   const services = [
     { title: "Modular Cold Rooms", image: "/images/cold_room_unit.png", slug: "modular-cold-rooms" },
@@ -72,8 +80,10 @@ export default function LandingPage() {
         className="relative bg-cover bg-center bg-no-repeat py-28 md:py-36 text-white overflow-hidden"
         style={{ backgroundImage: "url('/images/hero_background.png')" }}
       >
-        {/* Dark Navy Tint Overlay */}
-        <div className="absolute inset-0 bg-[#0C2340]/75" />
+        {/* Dark Navy Tint Overlay and Futuristic Glowing Mesh Blobs */}
+        <div className="absolute inset-0 bg-[#0C2340]/80 z-0" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-blue-500/20 blur-[100px] pointer-events-none z-0 animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-emerald-500/10 blur-[120px] pointer-events-none z-0" />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6 z-10">
           <motion.div
@@ -215,16 +225,65 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Photo on the right */}
-            <div className="relative h-[320px] rounded-2xl overflow-hidden border border-slate-100 shadow-lg">
-              <Image
-                src="/images/cold_room_unit.png"
-                alt="Modular Cold Room Enclosure"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
-              />
+            {/* Interactive 3D WebGL Telemetry Sandbox on the right */}
+            <div className="space-y-4">
+              <div className="relative h-[340px] rounded-2xl overflow-hidden border border-slate-100 shadow-lg bg-slate-900">
+                <ColdRoom3D
+                  doorOpen={doorOpen}
+                  compressorActive={compressorActive}
+                  temperature={temp}
+                />
+              </div>
+
+              {/* Telemetry Control Dashboard HUD */}
+              <div className="rounded-xl border border-slate-150 bg-slate-50 p-4 shadow-sm grid grid-cols-3 gap-3 items-center text-center">
+                {/* Temperature Telemetry dial */}
+                <div className="space-y-1">
+                  <div className="text-[8px] font-bold text-slate-400 uppercase font-mono tracking-wider">TEMP CONTROL</div>
+                  <div className="flex items-center justify-center gap-1">
+                    <span className="text-xs font-extrabold text-blue-600 font-mono">{temp.toFixed(1)}°C</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="-25"
+                    max="15"
+                    step="0.5"
+                    value={temp}
+                    onChange={(e) => setTemp(parseFloat(e.target.value))}
+                    className="w-full h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                  />
+                </div>
+
+                {/* Door open controller */}
+                <div className="space-y-1">
+                  <div className="text-[8px] font-bold text-slate-400 uppercase font-mono tracking-wider">DOOR VALVE</div>
+                  <button
+                    onClick={() => setDoorOpen(!doorOpen)}
+                    className={`w-full rounded-lg py-1.5 text-[9px] font-bold border transition-all ${
+                      doorOpen
+                        ? "bg-amber-50 border-amber-200 text-amber-600"
+                        : "bg-blue-50 border-blue-100 text-blue-600"
+                    }`}
+                  >
+                    {doorOpen ? "Open / Warning" : "Sealed / Ok"}
+                  </button>
+                </div>
+
+                {/* Compressor controller */}
+                <div className="space-y-1">
+                  <div className="text-[8px] font-bold text-slate-400 uppercase font-mono tracking-wider">COMPRESSOR</div>
+                  <button
+                    onClick={() => setCompressorActive(!compressorActive)}
+                    className={`w-full rounded-lg py-1.5 text-[9px] font-bold border transition-all ${
+                      compressorActive
+                        ? "bg-emerald-50 border-emerald-200 text-emerald-600"
+                        : "bg-red-50 border-red-100 text-red-600"
+                    }`}
+                  >
+                    {compressorActive ? "Active Fan" : "Idle Fan"}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -245,38 +304,43 @@ export default function LandingPage() {
           {/* Grid of 6 Services with photos */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((svc, idx) => (
-              <Link
-                href={`/services/${svc.slug}`}
+              <motion.div
                 key={idx}
-                className="group relative h-64 rounded-2xl overflow-hidden border border-slate-100 shadow-md flex flex-col justify-end p-6 hover:shadow-xl hover:border-blue-600/20 transition-all duration-300"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                {/* Background photo */}
-                <Image
-                  src={svc.image}
-                  alt={svc.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-                
-                {/* Dark bottom gradient overlay for readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                <Link
+                  href={`/services/${svc.slug}`}
+                  className="group relative h-64 rounded-2xl overflow-hidden border border-slate-100 shadow-md flex flex-col justify-end p-6 hover:shadow-xl hover:border-blue-600/20 transition-all duration-300 block"
+                >
+                  {/* Background photo */}
+                  <Image
+                    src={svc.image}
+                    alt={svc.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  
+                  {/* Dark bottom gradient overlay for readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
-                {/* Content Overlay */}
-                <div className="relative z-10 flex items-center justify-between w-full">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-blue-600 shadow-md">
-                      <Snowflake className="h-4.5 w-4.5" />
+                  {/* Content Overlay */}
+                  <div className="relative z-10 flex items-center justify-between w-full">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-blue-600 shadow-md">
+                        <Snowflake className="h-4.5 w-4.5" />
+                      </div>
+                      <span className="text-xs font-bold text-white font-display">
+                        {svc.title}
+                      </span>
                     </div>
-                    <span className="text-xs font-bold text-white font-display">
-                      {svc.title}
+                    <span className="text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors">
+                      <ArrowRight className="h-4.5 w-4.5 text-white" />
                     </span>
                   </div>
-                  <span className="text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors">
-                    <ArrowRight className="h-4.5 w-4.5 text-white" />
-                  </span>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             ))}
           </div>
 
