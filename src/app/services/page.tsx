@@ -61,10 +61,10 @@ export default function ServicesPage() {
   // Carousel state for recent projects
   const [projectIndex, setProjectIndex] = useState(0);
   const projectImages = [
-    "/images/cold_room_unit.png",
-    "/images/compressors.png",
-    "/images/hero_background.png",
-    "/images/technician.png"
+    "/images/cold_room_modular.png",
+    "/images/refrigeration_system.png",
+    "/images/display_cold_room.png",
+    "/images/amc_maintenance.png"
   ];
 
   const handleNextProject = () => {
@@ -79,54 +79,54 @@ export default function ServicesPage() {
     {
       title: "Modular Cold Rooms",
       desc: "Custom-built cold rooms for any temperature ranges with PUF panels and precision engineering.",
-      image: "/images/cold_room_unit.png",
+      image: "/images/cold_room_modular.png",
       slug: "modular-cold-rooms",
       icon: Snowflake
     },
     {
       title: "Refrigeration Systems",
       desc: "High-performance refrigeration systems for industrial and commercial applications.",
-      image: "/images/compressors.png",
+      image: "/images/refrigeration_system.png",
       slug: "refrigeration-systems",
       icon: Settings
     },
     {
       title: "Display Cold Rooms",
       desc: "Perfect storage and display solutions for supermarkets, retailers & food businesses.",
-      image: "/images/hero_background.png",
+      image: "/images/display_cold_room.png",
       slug: "display-cold-rooms",
       icon: Monitor
     },
     {
       title: "Fruits Ripening Chambers",
       desc: "Controlled atmosphere ripening chambers for bananas, mangoes & more.",
-      image: "/images/cold_room_unit.png",
+      image: "/images/ripening_chamber.png",
       slug: "ripening-chambers",
       icon: Calendar
     },
     {
       title: "Blast Chillers",
       desc: "Rapid cooling & freezing solutions to lock freshness and extend shelf life.",
-      image: "/images/compressors.png",
+      image: "/images/blast_chiller.png",
       slug: "blast-chillers",
       icon: Wind
     },
     {
       title: "AMC & Maintenance",
       desc: "Annual maintenance contracts for optimal performance and longer equipment life.",
-      image: "/images/technician.png",
+      image: "/images/amc_maintenance.png",
       slug: "amc",
       icon: Wrench
     }
   ];
 
   const industries: IndustryCard[] = [
-    { title: "Dairy & Milk Products", image: "/images/hero_background.png", icon: Droplet },
-    { title: "Meat & Poultry", image: "/images/technician.png", icon: Flame },
-    { title: "Fruits & Vegetables", image: "/images/cold_room_unit.png", icon: Apple },
-    { title: "Seafood & Fish", image: "/images/compressors.png", icon: Fish },
-    { title: "Pharmaceuticals", image: "/images/cold_room_unit.png", icon: Pill },
-    { title: "Food Processing & Retail", image: "/images/hero_background.png", icon: ShoppingCart }
+    { title: "Dairy & Milk Products", image: "/images/industry_dairy.png", icon: Droplet },
+    { title: "Meat & Poultry", image: "/images/industry_meat.png", icon: Flame },
+    { title: "Fruits & Vegetables", image: "/images/industry_fruits.png", icon: Apple },
+    { title: "Seafood & Fish", image: "/images/industry_seafood.png", icon: Fish },
+    { title: "Pharmaceuticals", image: "/images/industry_pharma.png", icon: Pill },
+    { title: "Food Processing & Retail", image: "/images/industry_retail.png", icon: ShoppingCart }
   ];
 
   const processSteps: ProcessStep[] = [
@@ -139,29 +139,30 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="flex flex-col flex-1 min-h-screen bg-white text-slate-800 selection:bg-blue-600 selection:text-white">
+    <div className="flex flex-col flex-1 min-h-screen bg-white text-slate-800 selection:bg-blue-600 selection:text-white overflow-x-hidden">
       {/* Header Navbar */}
       <Navbar />
 
       {/* Split Hero Banner */}
-      <section className="relative grid grid-cols-1 lg:grid-cols-2 bg-[#0C2340] text-white overflow-hidden min-h-[460px] items-center">
-        {/* Diagonal styling accent */}
+      <section className="relative grid grid-cols-1 lg:grid-cols-2 bg-[#0C2340] text-white overflow-hidden min-h-[460px] items-center perspective-2000">
+        {/* Diagonal styling accent & cyber-grid */}
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff02_1px,transparent_1px)] [background-size:16px_16px] opacity-40 z-0" />
+        <div className="absolute inset-0 cyber-grid opacity-[0.1] z-0" />
         
         {/* Left Side Content */}
         <div className="relative px-6 py-16 sm:px-12 lg:px-20 z-10 space-y-6">
           <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-blue-400 font-mono">
-            <Sparkles className="h-3.5 w-3.5" />
+            <Sparkles className="h-3.5 w-3.5 animate-spin-slow" />
             <span>Home &gt; Services</span>
           </div>
           
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl font-display leading-[1.1]">
             Our Cold Chain<br />
-            <span className="text-blue-400">Solutions</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Solutions</span>
           </h1>
           
-          <p className="max-w-md text-xs sm:text-sm text-slate-300 leading-relaxed">
-            End-to-end cold storage and refrigeration solutions tailored to your industry, space, and temperature needs.
+          <p className="max-w-md text-xs sm:text-sm text-slate-300 leading-relaxed font-body">
+            End-to-end cold storage and refrigeration solutions engineered for high performance, thermal integrity, and seamless IoT telemetry.
           </p>
 
           {/* 4 Feature Items */}
@@ -194,21 +195,29 @@ export default function ServicesPage() {
         </div>
 
         {/* Right Side Image */}
-        <div className="relative h-64 lg:h-full min-h-[300px] w-full self-stretch lg:border-l lg:border-white/5">
+        <motion.div 
+          initial={{ opacity: 0, x: 80, rotateY: -10 }}
+          animate={{ opacity: 1, x: 0, rotateY: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative h-64 lg:h-full min-h-[300px] w-full self-stretch lg:border-l lg:border-white/5 preserve-3d"
+        >
           <Image
-            src="/images/cold_room_unit.png"
+            src="/images/cold_room_modular.png"
             alt="Cold storage room installation"
             fill
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
           />
-        </div>
+          {/* Neon grid scan line */}
+          <div className="absolute inset-y-0 left-0 w-[2px] bg-blue-500/30 shadow-neon-blue pointer-events-none" />
+        </motion.div>
       </section>
 
       {/* Complete Range of Cold Chain Solutions */}
-      <section className="py-24 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="py-24 bg-white relative">
+        <div className="absolute top-1/4 left-0 w-80 h-80 cyber-grid opacity-[0.04] pointer-events-none" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
           <div className="text-center space-y-2">
             <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 font-mono block">
               WHAT WE BUILD
@@ -218,36 +227,45 @@ export default function ServicesPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
             {services.map((svc, idx) => {
               const Icon = svc.icon;
               return (
-                <div
+                <motion.div
                   key={idx}
-                  className="group rounded-2xl overflow-hidden border border-slate-100 bg-white shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between"
+                  initial={{ opacity: 0, y: 50, rotateX: 15 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: idx * 0.08, ease: "easeOut" }}
+                  whileHover={{ 
+                    y: -8, 
+                    scale: 1.02,
+                    boxShadow: "0 20px 25px -5px rgba(24, 95, 165, 0.1), 0 10px 10px -5px rgba(24, 95, 165, 0.04)"
+                  }}
+                  className="group rounded-2xl overflow-hidden border border-slate-100 bg-white shadow-sm transition-all duration-300 flex flex-col justify-between preserve-3d cursor-pointer"
                 >
                   <div>
                     {/* Top Image */}
-                    <div className="relative h-44 w-full bg-slate-50">
+                    <div className="relative h-44 w-full bg-slate-50 overflow-hidden">
                       <Image
                         src={svc.image}
                         alt={svc.title}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-103"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     </div>
                     {/* Content Section */}
                     <div className="p-6 space-y-3">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                           <Icon className="h-4.5 w-4.5" />
                         </div>
                         <h3 className="text-sm font-bold text-[#0c2340] font-display">
                           {svc.title}
                         </h3>
                       </div>
-                      <p className="text-xs text-slate-500 leading-relaxed">
+                      <p className="text-xs text-slate-500 leading-relaxed font-body">
                         {svc.desc}
                       </p>
                     </div>
@@ -262,7 +280,7 @@ export default function ServicesPage() {
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -270,8 +288,9 @@ export default function ServicesPage() {
       </section>
 
       {/* Solutions for Every Industry */}
-      <section className="py-24 bg-slate-50 border-t border-slate-100">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="py-24 bg-slate-50 border-t border-slate-100 relative">
+        <div className="absolute inset-0 cyber-grid opacity-[0.05] pointer-events-none" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 font-mono block">
               INDUSTRIES WE SERVE
@@ -279,18 +298,23 @@ export default function ServicesPage() {
             <h2 className="text-2xl sm:text-3xl font-bold text-[#0c2340] font-display">
               Solutions for Every Industry
             </h2>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-slate-500 leading-relaxed font-body">
               We deliver customized cold chain solutions for businesses of every size and industry.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 perspective-1000">
             {industries.map((ind, idx) => {
               const Icon = ind.icon;
               return (
-                <div
+                <motion.div
                   key={idx}
-                  className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm flex flex-col items-center text-center space-y-4 hover:shadow-md transition-shadow"
+                  initial={{ opacity: 0, scale: 0.85, rotateY: 15 }}
+                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.05, ease: "easeOut" }}
+                  whileHover={{ y: -6, scale: 1.04 }}
+                  className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm flex flex-col items-center text-center space-y-4 hover:shadow-md transition-shadow cursor-default preserve-3d"
                 >
                   {/* Rounded image container */}
                   <div className="relative h-24 w-full rounded-xl overflow-hidden bg-slate-100">
@@ -311,7 +335,7 @@ export default function ServicesPage() {
                   <span className="text-[11px] font-bold text-[#0c2340] leading-snug font-display">
                     {ind.title}
                   </span>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -319,8 +343,9 @@ export default function ServicesPage() {
       </section>
 
       {/* Our Process: How We Work */}
-      <section className="py-24 bg-white border-t border-slate-100">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
+      <section className="py-24 bg-white border-t border-slate-100 relative">
+        <div className="absolute bottom-10 right-0 w-80 h-80 cyber-grid opacity-[0.04] pointer-events-none" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
           <div className="text-center space-y-2">
             <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 font-mono block">
               OUR PROCESS
@@ -331,7 +356,7 @@ export default function ServicesPage() {
           </div>
 
           {/* Timeline Row */}
-          <div className="relative">
+          <div className="relative perspective-1000">
             {/* Connecting dashed line for desktop */}
             <div className="absolute top-8 left-12 right-12 h-0.5 border-t-2 border-dashed border-slate-200 hidden lg:block z-0" />
 
@@ -339,9 +364,16 @@ export default function ServicesPage() {
               {processSteps.map((step, idx) => {
                 const Icon = step.icon;
                 return (
-                  <div key={idx} className="flex flex-col items-center text-center space-y-4">
+                  <motion.div 
+                    key={idx}
+                    initial={{ opacity: 0, y: 30, rotateY: 15 }}
+                    whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6, delay: idx * 0.08 }}
+                    className="flex flex-col items-center text-center space-y-4 preserve-3d"
+                  >
                     {/* Circle Icon Wrapper */}
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white border-2 border-slate-200 text-slate-600 group-hover:border-blue-600 hover:text-blue-600 transition-colors bg-white shadow-sm">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white border-2 border-slate-200 text-slate-600 hover:border-blue-600 hover:text-blue-600 transition-colors bg-white shadow-sm">
                       <Icon className="h-6 w-6" />
                     </div>
 
@@ -352,11 +384,11 @@ export default function ServicesPage() {
                       <h4 className="text-xs font-bold text-[#0c2340] font-display">
                         {step.title}
                       </h4>
-                      <p className="text-[10px] text-slate-500 leading-relaxed px-2">
+                      <p className="text-[10px] text-slate-500 leading-relaxed px-2 font-body">
                         {step.desc}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>

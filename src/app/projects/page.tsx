@@ -35,12 +35,12 @@ export default function ProjectsPage() {
   const [filter, setFilter] = useState<"all" | "room" | "system" | "ripening" | "chiller" | "amc">("all");
 
   const projects: ProjectItem[] = [
-    { title: "Dairy Cold Room - 50 MT", location: "Pune, Maharashtra", category: "room", size: "Cold Room Installation", image: "/images/cold_room_unit.png" },
-    { title: "Centralized Refrigeration System", location: "Nashik, Maharashtra", category: "system", size: "Refrigeration System", image: "/images/compressors.png" },
-    { title: "Banana Ripening Chamber - 40 MT", location: "Solapur, Maharashtra", category: "ripening", size: "Ripening Chamber", image: "/images/cold_room_unit.png" },
-    { title: "Fruits & Vegetables Cold Storage", location: "Kolhapur, Maharashtra", category: "room", size: "Multi-Temperature Cold Room", image: "/images/hero_background.png" },
-    { title: "Blast Chiller Unit - 10 Tray", location: "Mumbai, Maharashtra", category: "chiller", size: "Blast Chiller", image: "/images/compressors.png" },
-    { title: "Annual Maintenance - AMC Contract", location: "Aurangabad, Maharashtra", category: "amc", size: "AMC & Maintenance", image: "/images/technician.png" },
+    { title: "Dairy Cold Room - 50 MT", location: "Pune, Maharashtra", category: "room", size: "Cold Room Installation", image: "/images/industry_dairy.png" },
+    { title: "Centralized Refrigeration System", location: "Nashik, Maharashtra", category: "system", size: "Refrigeration System", image: "/images/refrigeration_system.png" },
+    { title: "Banana Ripening Chamber - 40 MT", location: "Solapur, Maharashtra", category: "ripening", size: "Ripening Chamber", image: "/images/ripening_chamber.png" },
+    { title: "Fruits & Vegetables Cold Storage", location: "Kolhapur, Maharashtra", category: "room", size: "Multi-Temperature Cold Room", image: "/images/industry_fruits.png" },
+    { title: "Blast Chiller Unit - 10 Tray", location: "Mumbai, Maharashtra", category: "chiller", size: "Blast Chiller", image: "/images/blast_chiller.png" },
+    { title: "Annual Maintenance - AMC Contract", location: "Aurangabad, Maharashtra", category: "amc", size: "AMC & Maintenance", image: "/images/amc_maintenance.png" },
   ];
 
   const filteredProjects = filter === "all" ? projects : projects.filter((p) => p.category === filter);
@@ -160,29 +160,35 @@ export default function ProjectsPage() {
           {/* Project Cards Grid */}
           <motion.div
             layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 perspective-1000"
           >
             <AnimatePresence mode="popLayout">
-              {filteredProjects.map((p) => (
+              {filteredProjects.map((p, idx) => (
                 <motion.div
                   layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
+                  initial={{ opacity: 0, scale: 0.9, rotateX: 15 }}
+                  animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, rotateX: 15 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  whileHover={{ 
+                    y: -8, 
+                    scale: 1.03,
+                    rotateY: -2,
+                    boxShadow: "0 20px 25px -5px rgba(24, 95, 165, 0.08), 0 10px 10px -5px rgba(24, 95, 165, 0.03)"
+                  }}
                   key={p.title}
-                  className="group rounded-2xl overflow-hidden border border-slate-100 bg-white shadow-sm flex flex-col justify-between hover:shadow-lg transition-shadow duration-300"
+                  className="group rounded-2xl overflow-hidden border border-slate-100 bg-white shadow-sm flex flex-col justify-between transition-all duration-300 preserve-3d cursor-pointer"
                 >
-                  <div className="relative h-48 w-full">
+                  <div className="relative h-48 w-full overflow-hidden">
                     <Image
                       src={p.image}
                       alt={p.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-106"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     {/* Size tag */}
-                    <div className="absolute bottom-3 left-3 rounded bg-[#0c2340]/80 px-2 py-0.5 text-[9px] font-semibold text-white font-mono uppercase">
+                    <div className="absolute bottom-3 left-3 rounded bg-[#0c2340]/90 px-2 py-0.5 text-[9px] font-semibold text-white font-mono uppercase z-10">
                       {p.size}
                     </div>
                   </div>

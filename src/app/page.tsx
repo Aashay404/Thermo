@@ -49,12 +49,12 @@ export default function LandingPage() {
   const [temp, setTemp] = useState(-18.5);
 
   const services = [
-    { title: "Modular Cold Rooms", image: "/images/cold_room_unit.png", slug: "modular-cold-rooms" },
-    { title: "Refrigeration Systems", image: "/images/compressors.png", slug: "refrigeration-systems" },
-    { title: "Display Cold Rooms", image: "/images/hero_background.png", slug: "display-cold-rooms" },
-    { title: "Fruits Ripening Chambers", image: "/images/cold_room_unit.png", slug: "ripening-chambers" },
-    { title: "Blast Chillers", image: "/images/compressors.png", slug: "blast-chillers" },
-    { title: "AMC & Maintenance", image: "/images/technician.png", slug: "amc" },
+    { title: "Modular Cold Rooms", image: "/images/cold_room_modular.png", slug: "modular-cold-rooms" },
+    { title: "Refrigeration Systems", image: "/images/refrigeration_system.png", slug: "refrigeration-systems" },
+    { title: "Display Cold Rooms", image: "/images/display_cold_room.png", slug: "display-cold-rooms" },
+    { title: "Fruits Ripening Chambers", image: "/images/ripening_chamber.png", slug: "ripening-chambers" },
+    { title: "Blast Chillers", image: "/images/blast_chiller.png", slug: "blast-chillers" },
+    { title: "AMC & Maintenance", image: "/images/amc_maintenance.png", slug: "amc" },
   ];
 
   const usps = [
@@ -71,53 +71,60 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="flex flex-col flex-1 min-h-screen bg-white text-slate-800 selection:bg-blue-600 selection:text-white">
+    <div className="flex flex-col flex-1 min-h-screen bg-white text-slate-800 selection:bg-blue-600 selection:text-white overflow-x-hidden">
       {/* Header */}
       <Navbar />
 
       {/* Hero Banner with image background */}
       <section 
-        className="relative bg-cover bg-center bg-no-repeat py-28 md:py-36 text-white overflow-hidden"
+        className="relative bg-cover bg-center bg-no-repeat py-28 md:py-36 text-white overflow-hidden perspective-2000"
         style={{ backgroundImage: "url('/images/hero_background.png')" }}
       >
         {/* Dark Navy Tint Overlay and Futuristic Glowing Mesh Blobs */}
-        <div className="absolute inset-0 bg-[#0C2340]/80 z-0" />
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-blue-500/20 blur-[100px] pointer-events-none z-0 animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-emerald-500/10 blur-[120px] pointer-events-none z-0" />
+        <div className="absolute inset-0 bg-[#0C2340]/85 z-0" />
+        <div className="absolute inset-0 cyber-grid opacity-[0.15] z-0" />
+        
+        {/* Interactive Glowing Mesh Blobs */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-blue-500/20 blur-[130px] pointer-events-none z-0 animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-emerald-500/15 blur-[120px] pointer-events-none z-0" />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6 z-10">
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-xs font-bold tracking-widest text-slate-300 font-mono uppercase"
+            initial={{ opacity: 0, y: -20, rotateX: -10 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-blue-400 font-mono uppercase bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 rounded-full"
           >
-            ENGINEERED FOR PERFORMANCE. BUILT FOR RELIABILITY.
+            <Sparkles className="h-3.5 w-3.5 animate-spin-slow" />
+            <span>ENGINEERED FOR PERFORMANCE. BUILT FOR RELIABILITY.</span>
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            initial={{ opacity: 0, y: 30, rotateX: 20 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
             className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl font-display leading-[1.1] max-w-3xl"
           >
             Advanced Cold Chain &<br />
-            <span className="text-blue-400">Refrigeration Solutions</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 font-extrabold">
+              Refrigeration Solutions
+            </span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="max-w-xl text-xs sm:text-sm text-slate-200/90 leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="max-w-xl text-xs sm:text-sm text-slate-200/90 leading-relaxed font-body"
           >
-            We design, build and maintain reliable cold storage systems that preserve quality, reduce loss and power your growth.
+            We design, build and maintain reliable cold storage systems that preserve quality, reduce loss and power your growth. Discover precision telemetry systems built for tomorrow.
           </motion.p>
 
           {/* Action buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-wrap items-center gap-4 pt-4"
           >
             <button
@@ -125,23 +132,26 @@ export default function LandingPage() {
                 const event = new CustomEvent("open-quote-modal");
                 window.dispatchEvent(event);
               }}
-              className="flex items-center gap-2 rounded-md bg-blue-600 px-6 py-3.5 text-xs font-bold text-white transition-all hover:bg-blue-500 shadow-md hover:shadow-lg active:scale-95"
+              className="flex items-center gap-2 rounded-md bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3.5 text-xs font-bold text-white transition-all hover:scale-103 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/35 active:scale-95"
             >
               Get Free Consultation
             </button>
 
             <Link
               href="/dashboard"
-              className="rounded-md bg-[#0c2340] border border-white/10 px-6 py-3.5 text-xs font-bold text-white transition-all hover:bg-[#15345a] hover:border-white/20"
+              className="rounded-md bg-white/5 border border-white/10 px-6 py-3.5 text-xs font-bold text-white transition-all hover:bg-white/10 hover:border-white/20 active:scale-95 hover:scale-103"
             >
               3D IoT Dashboard Demo
             </Link>
           </motion.div>
 
           {/* Trusted ribbon */}
-          <div className="pt-8 border-t border-white/10 mt-12 max-w-4xl">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-mono mb-3">
-              TRUSTED BY BUSINESSES ACROSS INDIA
+          <div className="pt-8 border-t border-white/10 mt-12 max-w-4xl relative">
+            {/* Tech line indicator */}
+            <div className="absolute top-0 left-0 w-20 h-[2px] bg-blue-500" />
+            <div className="text-[10px] font-bold uppercase tracking-widest text-blue-400 font-mono mb-3 flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-ping" />
+              <span>TRUSTED BY LEADING ENTERPRISES ACROSS INDIA</span>
             </div>
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-slate-300">
               <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-blue-400" /> Food Processing</span>
@@ -158,12 +168,11 @@ export default function LandingPage() {
       {/* Floating White Features Box Ribbon overlapping the Hero */}
       <section className="relative z-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full -mt-10">
         <motion.div 
-          initial={{ opacity: 0, y: 40, rotateX: 15 }}
+          initial={{ opacity: 0, y: 50, rotateX: 20 }}
           whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          style={{ transformStyle: "preserve-3d", perspective: 1000 }}
-          className="rounded-xl bg-white border border-slate-100 p-6 md:p-8 shadow-xl grid grid-cols-2 md:grid-cols-5 gap-6 text-center"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="rounded-xl bg-white/90 backdrop-blur-md border border-slate-100 p-6 md:p-8 shadow-2xl shadow-slate-900/10 grid grid-cols-2 md:grid-cols-5 gap-6 text-center perspective-1000 preserve-3d"
         >
           {[
             { icon: Thermometer, label: "PRECISE TEMPERATURE CONTROL" },
@@ -174,63 +183,69 @@ export default function LandingPage() {
           ].map((feat, idx) => {
             const Icon = feat.icon;
             return (
-              <div 
+              <motion.div 
                 key={idx} 
-                className="flex flex-col items-center gap-3 p-2 md:border-r md:border-slate-100 md:last:border-0 border-0"
+                whileHover={{ y: -5, scale: 1.03, rotateY: 5 }}
+                className="flex flex-col items-center gap-3 p-2 md:border-r md:border-slate-100 md:last:border-0 border-0 transition-all duration-300 hover:shadow-neon-glow rounded-lg preserve-3d"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600 shadow-inner">
                   <Icon className="h-5 w-5" />
                 </div>
                 <span className="text-[9px] font-bold text-[#0c2340] tracking-wider leading-relaxed uppercase">
                   {feat.label}
                 </span>
-              </div>
+              </motion.div>
             );
           })}
         </motion.div>
       </section>
 
       {/* About ThermoVault Section */}
-      <section className="py-24 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="py-24 bg-white relative overflow-hidden">
+        {/* Subtle decorative background telemetry grid */}
+        <div className="absolute right-0 top-10 w-96 h-96 cyber-grid opacity-[0.1] pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center perspective-2000">
             {/* Story text */}
             <motion.div 
-              initial={{ opacity: 0, x: -50, rotateY: 10 }}
+              initial={{ opacity: 0, x: -60, rotateY: 15 }}
               whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="space-y-6"
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="space-y-6 preserve-3d"
             >
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono block">
-                ABOUT THERMOVAULT SYSTEMS
-              </span>
+              <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono">
+                <span className="h-2 w-2 bg-blue-600 rounded-full animate-pulse" />
+                <span>ABOUT THERMOVAULT SYSTEMS</span>
+              </div>
+              
               <h2 className="text-3xl font-bold tracking-tight text-[#0c2340] font-display">
-                Securing the Cold Chain <span className="text-blue-600">Ecosystem</span>
+                Securing the Cold Chain <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Ecosystem</span>
               </h2>
-              <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-body">
                 ThermoVault Systems delivers end-to-end cold chain and refrigeration solutions tailored for businesses of every size. From modular cold rooms to complete industrial refrigeration systems – we ensure quality, efficiency and long-term reliability.
               </p>
 
-              <div className="space-y-2 pt-2">
-                <div className="flex items-center gap-2.5 text-xs text-slate-700 font-medium">
-                  <CheckCircle2 className="h-4.5 w-4.5 text-blue-600 shrink-0" />
-                  <span>Engineering Excellence</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-xs text-slate-700 font-medium">
-                  <CheckCircle2 className="h-4.5 w-4.5 text-blue-600 shrink-0" />
-                  <span>Custom-Built Solutions</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-xs text-slate-700 font-medium">
-                  <CheckCircle2 className="h-4.5 w-4.5 text-blue-600 shrink-0" />
-                  <span>Pan India Service</span>
-                </div>
+              <div className="space-y-3.5 pt-2">
+                {[
+                  "Engineering Excellence with Premium Materials",
+                  "Custom-Built Solutions for Specialized Sectors",
+                  "Reliable Pan-India Support & Telemetry Monitoring"
+                ].map((text, idx) => (
+                  <div key={idx} className="flex items-center gap-3 text-xs text-slate-700 font-medium">
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-50 text-blue-600 shadow-sm shrink-0">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                    </div>
+                    <span>{text}</span>
+                  </div>
+                ))}
               </div>
 
               <div className="pt-4">
                 <Link
                   href="/about"
-                  className="rounded-md border border-[#0c2340] px-5 py-2.5 text-xs font-bold text-[#0c2340] hover:bg-[#0c2340] hover:text-white transition-all inline-flex items-center gap-2"
+                  className="rounded-md bg-[#0C2340] text-white px-5 py-3 text-xs font-bold hover:bg-[#15345a] hover:scale-103 hover:shadow-lg transition-all inline-flex items-center gap-2 active:scale-95"
                 >
                   <span>Know More About Us</span>
                   <ArrowRight className="h-3.5 w-3.5" />
@@ -240,24 +255,34 @@ export default function LandingPage() {
 
             {/* Interactive 3D WebGL Telemetry Sandbox on the right */}
             <motion.div 
-              initial={{ opacity: 0, x: 50, rotateY: -10 }}
+              initial={{ opacity: 0, x: 60, rotateY: -15 }}
               whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="space-y-4"
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="space-y-4 preserve-3d"
             >
-              <div className="relative h-[340px] rounded-2xl overflow-hidden border border-slate-100 shadow-lg bg-slate-900">
-                <ColdRoom3D
-                  doorOpen={doorOpen}
-                  compressorActive={compressorActive}
-                  temperature={temp}
-                />
+              {/* Tech corner accents */}
+              <div className="relative p-2 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 shadow-xl border border-slate-200/50">
+                <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-blue-500 rounded-tl-xl pointer-events-none" />
+                <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-blue-500 rounded-br-xl pointer-events-none" />
+                
+                <div className="relative h-[340px] rounded-xl overflow-hidden bg-slate-950 shadow-inner">
+                  <ColdRoom3D
+                    doorOpen={doorOpen}
+                    compressorActive={compressorActive}
+                    temperature={temp}
+                  />
+                  {/* Overlay telemetry grid scan line */}
+                  <div className="absolute inset-x-0 top-0 h-[2px] bg-cyan-500/20 shadow-neon-blue pointer-events-none animate-bounce" style={{ animationDuration: "6s" }} />
+                </div>
               </div>
 
               {/* Telemetry Control Dashboard HUD */}
-              <div className="rounded-xl border border-slate-150 bg-slate-50 p-4 shadow-sm grid grid-cols-3 gap-3 items-center text-center">
+              <div className="rounded-xl border border-slate-150 bg-slate-50 p-4 shadow-md grid grid-cols-3 gap-3 items-center text-center relative overflow-hidden">
+                <div className="absolute inset-0 cyber-grid opacity-[0.05] pointer-events-none" />
+                
                 {/* Temperature Telemetry dial */}
-                <div className="space-y-1">
+                <div className="space-y-1 relative z-10">
                   <div className="text-[8px] font-bold text-slate-400 uppercase font-mono tracking-wider">TEMP CONTROL</div>
                   <div className="flex items-center justify-center gap-1">
                     <span className="text-xs font-extrabold text-blue-600 font-mono">{temp.toFixed(1)}°C</span>
@@ -274,13 +299,13 @@ export default function LandingPage() {
                 </div>
 
                 {/* Door open controller */}
-                <div className="space-y-1">
+                <div className="space-y-1 relative z-10">
                   <div className="text-[8px] font-bold text-slate-400 uppercase font-mono tracking-wider">DOOR VALVE</div>
                   <button
                     onClick={() => setDoorOpen(!doorOpen)}
-                    className={`w-full rounded-lg py-1.5 text-[9px] font-bold border transition-all ${
+                    className={`w-full rounded-lg py-1.5 text-[9px] font-bold border transition-all shadow-sm ${
                       doorOpen
-                        ? "bg-amber-50 border-amber-200 text-amber-600"
+                        ? "bg-amber-50 border-amber-200 text-amber-600 shadow-neon-emerald"
                         : "bg-blue-50 border-blue-100 text-blue-600"
                     }`}
                   >
@@ -289,13 +314,13 @@ export default function LandingPage() {
                 </div>
 
                 {/* Compressor controller */}
-                <div className="space-y-1">
+                <div className="space-y-1 relative z-10">
                   <div className="text-[8px] font-bold text-slate-400 uppercase font-mono tracking-wider">COMPRESSOR</div>
                   <button
                     onClick={() => setCompressorActive(!compressorActive)}
-                    className={`w-full rounded-lg py-1.5 text-[9px] font-bold border transition-all ${
+                    className={`w-full rounded-lg py-1.5 text-[9px] font-bold border transition-all shadow-sm ${
                       compressorActive
-                        ? "bg-emerald-50 border-emerald-200 text-emerald-600"
+                        ? "bg-emerald-50 border-emerald-200 text-emerald-600 shadow-neon-emerald"
                         : "bg-red-50 border-red-100 text-red-600"
                     }`}
                   >
@@ -309,51 +334,58 @@ export default function LandingPage() {
       </section>
 
       {/* Comprehensive Cold Chain Solutions (Our Services) */}
-      <section className="py-24 bg-slate-50 border-t border-slate-100">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="py-24 bg-slate-50 border-t border-slate-100 relative">
+        <div className="absolute inset-0 cyber-grid opacity-[0.05] pointer-events-none" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 font-mono">
               OUR SOLUTIONS
             </span>
             <h2 className="text-3xl font-bold tracking-tight text-[#0c2340] font-display">
-              Comprehensive Cold Chain <span className="text-blue-600">Solutions</span>
+              Comprehensive Cold Chain <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Solutions</span>
             </h2>
           </div>
 
           {/* Grid of 6 Services with photos */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 perspective-1000">
             {services.map((svc, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 50, rotateX: 15 }}
+                initial={{ opacity: 0, y: 50, rotateX: 20 }}
                 whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
-                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ duration: 0.6, delay: idx * 0.08, ease: "easeOut" }}
+                whileHover={{ 
+                  y: -10, 
+                  scale: 1.03,
+                  rotateY: -2,
+                  boxShadow: "0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04)"
+                }}
+                className="preserve-3d"
               >
                 <Link
                   href={`/services/${svc.slug}`}
-                  className="group relative h-64 rounded-2xl overflow-hidden border border-slate-100 shadow-md flex flex-col justify-end p-6 hover:shadow-xl hover:border-blue-600/20 transition-all duration-300 block"
+                  className="group relative h-64 rounded-2xl overflow-hidden border border-slate-100 shadow-md flex flex-col justify-end p-6 hover:border-blue-500/30 transition-all duration-300 block bg-slate-900 preserve-3d"
                 >
                   {/* Background photo */}
                   <Image
                     src={svc.image}
                     alt={svc.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover transition-transform duration-500 group-hover:scale-108 opacity-85 group-hover:opacity-100"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   
                   {/* Dark bottom gradient overlay for readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
                   {/* Content Overlay */}
                   <div className="relative z-10 flex items-center justify-between w-full">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-blue-600 shadow-md">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-blue-600 shadow-md shadow-blue-500/20">
                         <Snowflake className="h-4.5 w-4.5" />
                       </div>
-                      <span className="text-xs font-bold text-white font-display">
+                      <span className="text-xs font-bold text-white font-display uppercase tracking-wider">
                         {svc.title}
                       </span>
                     </div>
@@ -378,33 +410,37 @@ export default function LandingPage() {
       </section>
 
       {/* Why Choose Us (Dark Navy background) */}
-      <section className="py-24 bg-[#0C2340] text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="py-24 bg-[#0C2340] text-white relative overflow-hidden">
+        {/* Futuristic background patterns */}
+        <div className="absolute inset-0 cyber-grid-dark opacity-[0.12] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/4 w-[350px] h-[350px] rounded-full bg-blue-500/10 blur-[100px] pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center perspective-2000">
             {/* Left lists */}
             <motion.div 
-              initial={{ opacity: 0, x: -40, rotateY: 8 }}
+              initial={{ opacity: 0, x: -40, rotateY: 10 }}
               whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="space-y-6"
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="space-y-6 preserve-3d"
             >
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono block">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400 font-mono block">
                 WHY CHOOSE US?
               </span>
               <h2 className="text-3xl font-bold tracking-tight text-white font-display">
                 Built For Performance.<br />
-                Designed For <span className="text-blue-400">Trust.</span>
+                Designed For <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Trust.</span>
               </h2>
 
               <div className="space-y-4 pt-4">
                 {usps.map((usp, idx) => (
-                  <div key={idx} className="flex gap-4">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
+                  <div key={idx} className="flex gap-4 group">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
                       <CheckCircle2 className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-white font-display">{usp.title}</h4>
+                      <h4 className="text-xs font-bold text-white font-display group-hover:text-blue-400 transition-colors">{usp.title}</h4>
                       <p className="text-[11px] text-slate-300 mt-1 leading-relaxed">{usp.desc}</p>
                     </div>
                   </div>
@@ -413,7 +449,7 @@ export default function LandingPage() {
             </motion.div>
 
             {/* Right outline stats counters */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 preserve-3d">
               {[
                 { val: "200+", label: "Projects Completed" },
                 { val: "100+", label: "Happy Clients" },
@@ -422,13 +458,19 @@ export default function LandingPage() {
               ].map((stat, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, scale: 0.85, rotateX: -10 }}
-                  whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
+                  initial={{ opacity: 0, scale: 0.85, rotateX: -15, rotateY: 10 }}
+                  whileInView={{ opacity: 1, scale: 1, rotateX: 0, rotateY: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
-                  className="rounded-xl border border-white/10 bg-white/2 p-6 text-center space-y-2"
+                  transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
+                  whileHover={{ 
+                    y: -6, 
+                    scale: 1.04, 
+                    borderColor: "rgba(59, 130, 246, 0.4)",
+                    boxShadow: "0 10px 20px -5px rgba(59, 130, 246, 0.2)"
+                  }}
+                  className="rounded-xl border border-white/10 bg-white/5 p-6 text-center space-y-2 transition-all duration-300 cursor-default"
                 >
-                  <div className="text-3xl font-extrabold text-blue-400 font-mono">{stat.val}</div>
+                  <div className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 font-mono">{stat.val}</div>
                   <div className="text-[9px] font-bold uppercase tracking-wider text-slate-300 font-mono">
                     {stat.label}
                   </div>

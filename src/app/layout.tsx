@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import ScrollProgress from "@/components/layout/ScrollProgress";
 import "./globals.css";
 
 const inter = Inter({
@@ -35,7 +36,8 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-800 selection:bg-blue-600 selection:text-white">
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-800 selection:bg-blue-600 selection:text-white relative">
+        <ScrollProgress />
         {children}
 
         {/* Floating Sticky WhatsApp Button */}

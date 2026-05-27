@@ -48,18 +48,18 @@ export default function ProductsPage() {
   ];
 
   const products: ProductCardItem[] = [
-    { name: "PUF Panels", desc: "High density PUF panels with excellent insulation and long-lasting performance.", image: "/images/cold_room_unit.png", category: "panels" },
-    { name: "Compressors", desc: "High-efficiency compressors for reliable cooling and optimal performance.", image: "/images/compressors.png", category: "compressors" },
-    { name: "Evaporators", desc: "Efficient evaporators for uniform cooling and superior temperature control.", image: "/images/hero_background.png", category: "evaporators" },
-    { name: "Condensing Units", desc: "Robust condensing units designed for maximum efficiency and durability.", image: "/images/compressors.png", category: "condensers" },
-    { name: "Control Panels", desc: "Smart control panels for accurate monitoring and seamless operations.", image: "/images/technician.png", category: "controllers" },
-    { name: "Cold Room Doors", desc: "Strong, insulated doors for energy efficiency, safety, and durability.", image: "/images/cold_room_unit.png", category: "doors" },
-    { name: "Doors & Hardware", desc: "Premium quality hardware for smooth operation and long life.", image: "/images/cold_room_unit.png", category: "hardware" },
-    { name: "Copper Piping", desc: "High-grade copper pipes for efficient heat transfer and durability.", image: "/images/compressors.png", category: "piping" },
-    { name: "Electrical Systems", desc: "Reliable electrical systems and wiring for safe and efficient operations.", image: "/images/technician.png", category: "electrical" },
-    { name: "Refrigeration Accessories", desc: "Complete range of accessories for installation, control and maintenance.", image: "/images/compressors.png", category: "accessories" },
-    { name: "Insulation Materials", desc: "High-quality insulation materials for maximum thermal efficiency.", image: "/images/cold_room_unit.png", category: "insulation" },
-    { name: "Spare Parts", desc: "Genuine spare parts to keep your systems functioning smoothly.", image: "/images/compressors.png", category: "spares" },
+    { name: "PUF Panels", desc: "High density PUF panels with excellent insulation and long-lasting performance.", image: "/images/puf_panels.png", category: "panels" },
+    { name: "Compressors", desc: "High-efficiency compressors for reliable cooling and optimal performance.", image: "/images/refrigeration_system.png", category: "compressors" },
+    { name: "Evaporators", desc: "Efficient evaporators for uniform cooling and superior temperature control.", image: "/images/evaporator.png", category: "evaporators" },
+    { name: "Condensing Units", desc: "Robust condensing units designed for maximum efficiency and durability.", image: "/images/refrigeration_system.png", category: "condensers" },
+    { name: "Control Panels", desc: "Smart control panels for accurate monitoring and seamless operations.", image: "/images/control_panel_unit.png", category: "controllers" },
+    { name: "Cold Room Doors", desc: "Strong, insulated doors for energy efficiency, safety, and durability.", image: "/images/cold_room_door.png", category: "doors" },
+    { name: "Doors & Hardware", desc: "Premium quality hardware for smooth operation and long life.", image: "/images/cold_room_door.png", category: "hardware" },
+    { name: "Copper Piping", desc: "High-grade copper pipes for efficient heat transfer and durability.", image: "/images/refrigeration_system.png", category: "piping" },
+    { name: "Electrical Systems", desc: "Reliable electrical systems and wiring for safe and efficient operations.", image: "/images/control_panel_unit.png", category: "electrical" },
+    { name: "Refrigeration Accessories", desc: "Complete range of accessories for installation, control and maintenance.", image: "/images/refrigeration_system.png", category: "accessories" },
+    { name: "Insulation Materials", desc: "High-quality insulation materials for maximum thermal efficiency.", image: "/images/puf_panels.png", category: "insulation" },
+    { name: "Spare Parts", desc: "Genuine spare parts to keep your systems functioning smoothly.", image: "/images/refrigeration_system.png", category: "spares" },
   ];
 
   const filteredProducts = activeCategory === "all" ? products : products.filter((p) => p.category === activeCategory);
@@ -160,11 +160,21 @@ export default function ProductsPage() {
 
             {/* Products grid on right */}
             <div className="lg:col-span-3">
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 perspective-1000">
                 {filteredProducts.map((p, idx) => (
-                  <div
+                  <motion.div
                     key={idx}
-                    className="group rounded-2xl overflow-hidden border border-slate-100 bg-white shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between"
+                    initial={{ opacity: 0, y: 40, rotateX: 12 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.5, delay: (idx % 3) * 0.08, ease: "easeOut" }}
+                    whileHover={{ 
+                      y: -6, 
+                      scale: 1.03, 
+                      rotateY: -2,
+                      boxShadow: "0 20px 25px -5px rgba(24, 95, 165, 0.08), 0 10px 10px -5px rgba(24, 95, 165, 0.03)"
+                    }}
+                    className="group rounded-2xl overflow-hidden border border-slate-100 bg-white shadow-sm transition-all duration-300 flex flex-col justify-between preserve-3d"
                   >
                     <div>
                       {/* Thumbnail photo */}
@@ -173,14 +183,14 @@ export default function ProductsPage() {
                           src={p.image}
                           alt={p.name}
                           fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-103"
+                          className="object-cover transition-transform duration-300 group-hover:scale-106"
                         />
                       </div>
                       <div className="p-5 space-y-2.5">
                         <h3 className="text-sm font-bold text-[#0c2340] font-display">
                           {p.name}
                         </h3>
-                        <p className="text-xs text-slate-500 leading-relaxed">
+                        <p className="text-xs text-slate-500 leading-relaxed font-body">
                           {p.desc}
                         </p>
                       </div>
@@ -195,7 +205,7 @@ export default function ProductsPage() {
                         <ArrowRight className="h-3.5 w-3.5" />
                       </button>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>

@@ -110,7 +110,7 @@ export default function AboutPage() {
             {/* Sizable Image */}
             <div className="relative h-[340px] rounded-2xl overflow-hidden border border-slate-100 shadow-md">
               <Image
-                src="/images/cold_room_unit.png"
+                src="/images/cold_room_modular.png"
                 alt="Walk-in Cold Storage Room Installation"
                 fill
                 className="object-cover"
@@ -179,7 +179,7 @@ export default function AboutPage() {
             {/* Photo on the left */}
             <div className="relative h-[360px] rounded-2xl overflow-hidden border border-slate-100 shadow-md">
               <Image
-                src="/images/technician.png"
+                src="/images/amc_maintenance.png"
                 alt="Engineers working on refrigeration control panel"
                 fill
                 className="object-cover"
