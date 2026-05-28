@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import {
   Thermometer,
   Droplets,
@@ -58,16 +58,12 @@ export default function IotMonitor() {
     { time: "10:36:40", type: "info", message: "Temperature reached set-point boundary (-17.5°C)." },
   ]);
 
-  const [chartData, setChartData] = useState<ChartData[]>([]);
-
-  // Init chart data with 10 historical points
-  useEffect(() => {
+  const initialChartData = useMemo(() => {
     const data: ChartData[] = [];
     const now = new Date();
     for (let i = 9; i >= 0; i--) {
       const d = new Date(now.getTime() - i * 5000);
       const timeStr = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-      // Add standard curve approaching set point
       data.push({
         time: timeStr,
         temp: parseFloat((-15.0 - (9 - i) * 0.3 + Math.random() * 0.1).toFixed(1)),
@@ -75,12 +71,16 @@ export default function IotMonitor() {
         humidity: Math.floor(60 + Math.random() * 3),
       });
     }
-    setChartData(data);
+    return data;
   }, []);
 
+  const [chartData, setChartData] = useState<ChartData[]>(initialChartData);
+
   // Ticker ref to avoid state stale closure in interval
-  const logsRef = useRef(eventLogs);
-  logsRef.current = eventLogs;
+  const logsRef = useRef<LogItem[]>([]);
+  useEffect(() => {
+    logsRef.current = eventLogs;
+  }, [eventLogs]);
 
   const addLog = (message: string, type: "info" | "warning" | "success" = "info") => {
     const timeStr = new Date().toLocaleTimeString([], {
@@ -95,17 +95,22 @@ export default function IotMonitor() {
   useEffect(() => {
     if (!defrostActive) return;
 
-    addLog("Defrost cycle active: Evaporator heater enabled.", "warning");
-    setCompressorActive(false);
+    // Schedule logs/state updates asynchronously to avoid synchronous setState-in-effect
+    const startTimer = setTimeout(() => {
+      addLog("Defrost cycle active: Evaporator heater enabled.", "warning");
+      setCompressorActive(false);
+    }, 0);
 
-    // Defrost runs for 12 seconds in this simulation
-    const timer = setTimeout(() => {
+    const endTimer = setTimeout(() => {
       setDefrostActive(false);
       addLog("Defrost cycle complete. Resuming standard compressor operations.", "success");
       setCompressorActive(true);
     }, 12000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(startTimer);
+      clearTimeout(endTimer);
+    };
   }, [defrostActive]);
 
   // --- Real-time Thermodynamics Simulation Engine ---
