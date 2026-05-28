@@ -6,7 +6,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Phone, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Breadcrumbs from "./Breadcrumbs";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -56,9 +55,7 @@ export default function Navbar() {
               />
             </Link>
 
-            <div className="block w-full">
-              <Breadcrumbs className="text-xs text-slate-600" />
-            </div>
+            
           </div>
 
           {/* Centered Navigation Links (Desktop) */}

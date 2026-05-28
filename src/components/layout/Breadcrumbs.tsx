@@ -20,13 +20,10 @@ export default function Breadcrumbs({ className }: { className?: string }) {
 
   const segments = pathname.split("/").filter(Boolean);
 
-  const crumbs = [
-    { label: "Home", href: "/" },
-    ...segments.map((seg, idx) => ({
-      label: titleCase(decodeURIComponent(seg)),
-      href: "/" + segments.slice(0, idx + 1).join("/"),
-    })),
-  ];
+  const crumbs = segments.map((seg, idx) => ({
+    label: titleCase(decodeURIComponent(seg)),
+    href: "/" + segments.slice(0, idx + 1).join("/"),
+  }));
 
   return (
     <nav aria-label="Breadcrumb" className={className}>
