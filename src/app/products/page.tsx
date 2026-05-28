@@ -50,21 +50,84 @@ export default function ProductsPage() {
   ];
 
   const products: ProductCardItem[] = [
-    { name: "PUF Panels", desc: "High density PUF panels with excellent insulation and long-lasting performance.", image: "/images/puf_panels.png", category: "panels" },
-    { name: "Compressors", desc: "High-efficiency compressors for reliable cooling and optimal performance.", image: "/images/refrigeration_system.png", category: "compressors" },
-    { name: "Evaporators", desc: "Efficient evaporators for uniform cooling and superior temperature control.", image: "/images/evaporator.png", category: "evaporators" },
-    { name: "Condensing Units", desc: "Robust condensing units designed for maximum efficiency and durability.", image: "/images/refrigeration_system.png", category: "condensers" },
-    { name: "Control Panels", desc: "Smart control panels for accurate monitoring and seamless operations.", image: "/images/control_panel_unit.png", category: "controllers" },
-    { name: "Cold Room Doors", desc: "Strong, insulated doors for energy efficiency, safety, and durability.", image: "/images/cold_room_door.png", category: "doors" },
-    { name: "Doors & Hardware", desc: "Premium quality hardware for smooth operation and long life.", image: "/images/cold_room_door.png", category: "hardware" },
-    { name: "Copper Piping", desc: "High-grade copper pipes for efficient heat transfer and durability.", image: "/images/refrigeration_system.png", category: "piping" },
-    { name: "Electrical Systems", desc: "Reliable electrical systems and wiring for safe and efficient operations.", image: "/images/control_panel_unit.png", category: "electrical" },
-    { name: "Refrigeration Accessories", desc: "Complete range of accessories for installation, control and maintenance.", image: "/images/refrigeration_system.png", category: "accessories" },
-    { name: "Insulation Materials", desc: "High-quality insulation materials for maximum thermal efficiency.", image: "/images/puf_panels.png", category: "insulation" },
-    { name: "Spare Parts", desc: "Genuine spare parts to keep your systems functioning smoothly.", image: "/images/refrigeration_system.png", category: "spares" },
+    {
+      name: "PUF Panels",
+      desc: "High density PUF panels with excellent insulation and long-lasting performance.",
+      image: "/images/puf_panels.png",
+      category: "panels",
+    },
+    {
+      name: "Compressors",
+      desc: "High-efficiency compressors for reliable cooling and optimal performance.",
+      image: "/images/refrigeration_system.png",
+      category: "compressors",
+    },
+    {
+      name: "Evaporators",
+      desc: "Efficient evaporators for uniform cooling and superior temperature control.",
+      image: "/images/evaporator.png",
+      category: "evaporators",
+    },
+    {
+      name: "Condensing Units",
+      desc: "Robust condensing units designed for maximum efficiency and durability.",
+      image: "/images/refrigeration_system.png",
+      category: "condensers",
+    },
+    {
+      name: "Control Panels",
+      desc: "Smart control panels for accurate monitoring and seamless operations.",
+      image: "/images/control_panel_unit.png",
+      category: "controllers",
+    },
+    {
+      name: "Cold Room Doors",
+      desc: "Strong, insulated doors for energy efficiency, safety, and durability.",
+      image: "/images/cold_room_door.png",
+      category: "doors",
+    },
+    {
+      name: "Doors & Hardware",
+      desc: "Premium quality hardware for smooth operation and long life.",
+      image: "/images/cold_room_door.png",
+      category: "hardware",
+    },
+    {
+      name: "Copper Piping",
+      desc: "High-grade copper pipes for efficient heat transfer and durability.",
+      image: "/images/refrigeration_system.png",
+      category: "piping",
+    },
+    {
+      name: "Electrical Systems",
+      desc: "Reliable electrical systems and wiring for safe and efficient operations.",
+      image: "/images/control_panel_unit.png",
+      category: "electrical",
+    },
+    {
+      name: "Refrigeration Accessories",
+      desc: "Complete range of accessories for installation, control and maintenance.",
+      image: "/images/refrigeration_system.png",
+      category: "accessories",
+    },
+    {
+      name: "Insulation Materials",
+      desc: "High-quality insulation materials for maximum thermal efficiency.",
+      image: "/images/puf_panels.png",
+      category: "insulation",
+    },
+    {
+      name: "Spare Parts",
+      desc: "Genuine spare parts to keep your systems functioning smoothly.",
+      image: "/images/refrigeration_system.png",
+      category: "spares",
+    },
   ];
 
-  const filteredProducts = activeCategory === "all" ? products : products.filter((p) => p.category === activeCategory);
+  const filteredProducts =
+    activeCategory === "all"
+      ? products
+      : products.filter((p) => p.category === activeCategory);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen bg-white text-slate-800 selection:bg-blue-600 selection:text-white">
@@ -72,7 +135,7 @@ export default function ProductsPage() {
       <Navbar />
 
       {/* Hero Header with image background */}
-      <section 
+      <section
         className="relative bg-cover bg-center bg-no-repeat py-20 text-white overflow-hidden"
         style={{ backgroundImage: "url('/images/hero_background.png')" }}
       >
@@ -88,14 +151,23 @@ export default function ProductsPage() {
             Products & <span className="text-blue-400">Components</span>
           </h1>
           <p className="max-w-2xl text-xs sm:text-sm text-slate-200/90 leading-relaxed">
-            High-quality components and materials that ensure efficiency, durability and unmatched performance in every cold chain solution.
+            High-quality components and materials that ensure efficiency,
+            durability and unmatched performance in every cold chain solution.
           </p>
 
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-5 pt-2 text-[10px] font-bold text-slate-300">
-            <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-blue-400" /> Premium Quality</span>
-            <span className="flex items-center gap-1.5"><Zap className="h-4 w-4 text-blue-400" /> High Performance</span>
-            <span className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-blue-400" /> Long Life</span>
-            <span className="flex items-center gap-1.5"><Snowflake className="h-4 w-4 text-blue-400" /> Energy Efficient</span>
+            <span className="flex items-center gap-1.5">
+              <ShieldCheck className="h-4 w-4 text-blue-400" /> Premium Quality
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Zap className="h-4 w-4 text-blue-400" /> High Performance
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Clock className="h-4 w-4 text-blue-400" /> Long Life
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Snowflake className="h-4 w-4 text-blue-400" /> Energy Efficient
+            </span>
           </div>
         </div>
       </section>
@@ -169,20 +241,31 @@ export default function ProductsPage() {
                     initial={{ opacity: 0, y: 40, rotateX: 12 }}
                     whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                     viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.5, delay: (idx % 3) * 0.08, ease: "easeOut" }}
-                    whileHover={{ 
-                      y: -6, 
-                      scale: 1.03, 
+                    transition={{
+                      duration: 0.5,
+                      delay: (idx % 3) * 0.08,
+                      ease: "easeOut",
+                    }}
+                    whileHover={{
+                      y: -6,
+                      scale: 1.03,
                       rotateY: -2,
-                      boxShadow: "0 20px 25px -5px rgba(24, 95, 165, 0.08), 0 10px 10px -5px rgba(24, 95, 165, 0.03)"
+                      boxShadow:
+                        "0 20px 25px -5px rgba(24, 95, 165, 0.08), 0 10px 10px -5px rgba(24, 95, 165, 0.03)",
                     }}
                     onClick={() => {
-                      const slug = p.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+                      const slug = p.name
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")
+                        .replace(/[^a-z0-9-]/g, "");
                       router.push(`/products/${slug}`);
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
-                        const slug = p.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+                        const slug = p.name
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")
+                          .replace(/[^a-z0-9-]/g, "");
                         router.push(`/products/${slug}`);
                       }
                     }}
@@ -209,12 +292,15 @@ export default function ProductsPage() {
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="p-5 pt-0 mt-auto">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          const slug = p.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+                          const slug = p.name
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")
+                            .replace(/[^a-z0-9-]/g, "");
                           router.push(`/products/${slug}`);
                         }}
                         onKeyDown={(e) => e.stopPropagation()}
@@ -235,11 +321,23 @@ export default function ProductsPage() {
       {/* Verification Ribbon */}
       <section className="bg-slate-50 border-t border-slate-100 py-8 relative z-10 text-[#0C2340]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-wrap justify-between gap-6 text-center text-xs font-bold font-mono">
-          <span className="flex items-center gap-2"><ShieldCheck className="h-5 w-5 text-blue-600" /> Premium Quality Materials</span>
-          <span className="flex items-center gap-2"><CheckCircle2 className="h-5 w-5 text-blue-600" /> Tested for Maximum Performance</span>
-          <span className="flex items-center gap-2"><Zap className="h-5 w-5 text-blue-600" /> Energy Efficient Solutions</span>
-          <span className="flex items-center gap-2"><Award className="h-5 w-5 text-blue-600" /> Long Lasting Durability</span>
-          <span className="flex items-center gap-2"><Users className="h-5 w-5 text-blue-600" /> Trusted by Industries</span>
+          <span className="flex items-center gap-2">
+            <ShieldCheck className="h-5 w-5 text-blue-600" /> Premium Quality
+            Materials
+          </span>
+          <span className="flex items-center gap-2">
+            <CheckCircle2 className="h-5 w-5 text-blue-600" /> Tested for
+            Maximum Performance
+          </span>
+          <span className="flex items-center gap-2">
+            <Zap className="h-5 w-5 text-blue-600" /> Energy Efficient Solutions
+          </span>
+          <span className="flex items-center gap-2">
+            <Award className="h-5 w-5 text-blue-600" /> Long Lasting Durability
+          </span>
+          <span className="flex items-center gap-2">
+            <Users className="h-5 w-5 text-blue-600" /> Trusted by Industries
+          </span>
         </div>
       </section>
 
@@ -247,10 +345,15 @@ export default function ProductsPage() {
       <section className="py-12 bg-[#0C2340] text-white border-t border-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-xl font-bold font-display">Need Help Choosing the Right Product?</h3>
-            <p className="text-xs text-slate-300">Our experts are here to help you build the perfect cold chain solution.</p>
+            <h3 className="text-xl font-bold font-display">
+              Need Help Choosing the Right Product?
+            </h3>
+            <p className="text-xs text-slate-300">
+              Our experts are here to help you build the perfect cold chain
+              solution.
+            </p>
           </div>
-          
+
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="tel:+918055010620"
