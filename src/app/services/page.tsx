@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -437,6 +437,16 @@ export default function ServicesPage() {
             {/* Connecting dashed line for desktop */}
             <div className="absolute top-8 left-12 right-12 h-0.5 border-t-2 border-dashed border-slate-200 hidden lg:block z-0" />
 
+            {/* Animated gradient progress overlay (subtle) */}
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="absolute top-8 left-12 h-1 z-0 rounded-full overflow-hidden hidden lg:block"
+            >
+              <div className="h-full bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 opacity-90" />
+            </motion.div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 relative z-10">
               {processSteps.map((step, idx) => {
                 const Icon = step.icon;
@@ -447,21 +457,42 @@ export default function ServicesPage() {
                     whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.6, delay: idx * 0.08 }}
-                    className="flex flex-col items-center text-center space-y-4 preserve-3d"
+                    whileHover={{ scale: 1.04, y: -6 }}
+                    whileTap={{ scale: 0.995 }}
+                    className="relative group flex flex-col items-center text-center space-y-4 preserve-3d focus:outline-none cursor-default"
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.currentTarget.animate && e.currentTarget.animate();
+                      }
+                    }}
                   >
-                    {/* Circle Icon Wrapper */}
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white border-2 border-slate-200 text-slate-600 hover:border-blue-600 hover:text-blue-600 transition-colors bg-white shadow-sm">
-                      <Icon className="h-6 w-6" />
+                    {/* small connector to main dashed line (desktop only) */}
+                    <div className="hidden lg:block absolute -top-4 left-1/2 transform -translate-x-1/2 h-4 w-0.5 bg-slate-200 transition-colors group-hover:bg-blue-600" />
+
+                    {/* Circle Icon Wrapper with pulsing halo on first render */}
+                    <div className="relative">
+                      <motion.span
+                        initial={{ scale: 0.6, opacity: 0.45 }}
+                        animate={{ scale: 1.6, opacity: 0 }}
+                        transition={{ duration: 1.1, delay: idx * 0.12, ease: "easeOut" }}
+                        className="absolute -inset-2 rounded-full bg-blue-400/30 blur-md pointer-events-none"
+                      />
+
+                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white border-2 border-slate-200 text-slate-600 transition-all duration-300 shadow-sm transform group-hover:scale-105 group-hover:border-blue-600 group-hover:text-blue-600">
+                        <Icon className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+                      </div>
                     </div>
 
                     <div className="space-y-1">
-                      <div className="text-[10px] font-bold font-mono text-blue-600 uppercase">
+                      <div className="text-[10px] font-bold font-mono text-blue-600 uppercase tracking-wide">
                         Step {step.step}
                       </div>
-                      <h4 className="text-xs font-bold text-[#0c2340] font-display">
+                      <h4 className="text-sm font-bold text-[#0c2340] font-display transition-all duration-200 group-hover:scale-105">
                         {step.title}
                       </h4>
-                      <p className="text-[10px] text-slate-500 leading-relaxed px-2 font-body">
+                      <p className="text-[11px] text-slate-500 leading-relaxed px-2 font-body max-w-[16rem]">
                         {step.desc}
                       </p>
                     </div>
