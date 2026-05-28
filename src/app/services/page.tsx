@@ -464,7 +464,13 @@ export default function ServicesPage() {
                     tabIndex={0}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
-                        e.currentTarget.animate && e.currentTarget.animate();
+                        // Trigger keyboard activation in an accessible way
+                        // Use click() so any click handlers or focus effects run
+                        // rather than calling the Web Animations API directly.
+                        // Some browsers may not implement animate() or calling
+                        // it without parameters can be a no-op or throw.
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        (e.currentTarget as any).click && (e.currentTarget as any).click();
                       }
                     }}
                   >
